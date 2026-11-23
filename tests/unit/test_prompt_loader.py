@@ -35,3 +35,8 @@ def test_get_nonexistent_scenario_raises_file_not_found(temp_prompts_dir: Path):
     loader = PromptLoader(prompts_dir=temp_prompts_dir)
     with pytest.raises(FileNotFoundError):
         loader.get_scenario(cwe_id="cwe_999", variant="neutral")
+
+def test_project_prompts_directory_has_all_nine_scenarios():
+    loader = PromptLoader(prompts_dir=Path("prompts"))
+    scenarios = loader.list_scenarios()
+    assert len(scenarios) == 9
